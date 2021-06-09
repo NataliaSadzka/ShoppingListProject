@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShoppingList</string>
+    <string name="tab_text_1">Listy Zakupów</string>
+    <string name="tab_text_2">Listy Przepisów</string>
+</resources>
