@@ -27,13 +27,13 @@
                 android:src="@drawable/ic_description"
                 android:layout_gravity="center_vertical"
                 android:padding="10dp"/>
-
         <ImageView
                 android:id="@+id/image_delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_delete"
                 android:layout_gravity="center" android:padding="03dp"/>
+
     </LinearLayout>
 
 

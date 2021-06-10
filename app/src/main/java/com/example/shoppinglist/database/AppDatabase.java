@@ -33,6 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                 public void run() {
                                     INSTANCE.productDao().insertProduct(INSTANCE.products);
                                     INSTANCE.recipeDao().insertRecipe(INSTANCE.recipes);
+                                    INSTANCE.shoppingListDao().insertShoppingList(INSTANCE.shoppingLists);
                                     INSTANCE.recipeProductDao().insertRecipeProduct(INSTANCE.chiliConCarneRecipe);
                                 }
                             });
@@ -57,8 +58,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
     Recipe[] recipes = new Recipe[] {
             new Recipe(1, "Chili con carne", null),
-            new Recipe(2, "Cycuszki", null),
-            new Recipe(3, "Pupcia", null)
+            new Recipe(2, "Kurczak Tikka masala", null),
+            new Recipe(3, "Spaghetti", null)
+    };
+
+    ShoppingList[] shoppingLists = new ShoppingList[] {
+            new ShoppingList(1, "Lidl"),
+            new ShoppingList(2, "Grill")
     };
 
     RecipeProduct[] chiliConCarneRecipe = new RecipeProduct[] {

@@ -1,6 +1,7 @@
 package com.example.shoppinglist.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.Product;
 import com.example.shoppinglist.database.ShoppingList;
 
 import java.util.List;
+
+import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder> {
 
@@ -46,6 +48,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             public void onClick(View v) {
                 AppDatabase db = AppDatabase.getDbInstance(v.getContext());
                 db.shoppingListDao().delete(shoppingLists.get(position));
+            }
+        });
+
+        holder.imageDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
             }
         });
     }

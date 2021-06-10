@@ -88,6 +88,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
             super(view);
             textViewName = view.findViewById(R.id.textViewName);
             imageDelete = view.findViewById(R.id.image_delete);
+            //imageDelete.setVisibility(View.INVISIBLE);
         }
     }
 }

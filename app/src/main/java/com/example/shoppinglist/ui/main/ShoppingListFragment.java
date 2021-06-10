@@ -1,5 +1,6 @@
 package com.example.shoppinglist.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ShoppingListFragment extends Fragment {
 
     private ShoppingListAdapter shoppingListAdapter;
     private List<ShoppingList> shoppingLists;
-    private ImageView addNewShoppingListImage;
+    private ImageView addNewShoppingList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
@@ -40,13 +40,16 @@ public class ShoppingListFragment extends Fragment {
         shoppingListAdapter = new ShoppingListAdapter(this.getContext(), shoppingLists);
         recyclerView.setAdapter(shoppingListAdapter);
 
-        addNewShoppingListImage = view.findViewById(R.id.addNewImage);
+        addNewShoppingList = view.findViewById(R.id.addNewImage);
 
-        addNewShoppingListImage.setOnClickListener(new View.OnClickListener() {
+        addNewShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(v.getContext(), AddNewShoppingListActivity.class);
+                startActivity(intent);
+
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
     }

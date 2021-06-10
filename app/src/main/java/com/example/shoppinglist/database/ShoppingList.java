@@ -12,6 +12,15 @@ public class ShoppingList {
     @ColumnInfo(name = "name")
     private String name;
 
+    public ShoppingList(int shoppingListId, String name) {
+        this.shoppingListId = shoppingListId;
+        this.name = name;
+    }
+
+    public ShoppingList() {
+
+    }
+
     public int getShoppingListId() {
         return shoppingListId;
     }
