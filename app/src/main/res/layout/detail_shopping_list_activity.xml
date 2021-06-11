@@ -21,13 +21,15 @@
                 android:text="Nazwa"
                 android:textAllCaps="true"
                 android:textSize="30sp"
-                android:textColor="#0E0E0E" android:layout_marginLeft="5dp"/>
+                android:textColor="#0E0E0E" android:layout_marginLeft="5dp" android:id="@+id/TextViewName"/>
         <ImageView
-                android:id="@+id/image_delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/image_edit"
                 android:src="@drawable/ic_edit"
-                android:layout_gravity="center" android:padding="03dp"/>
+                android:layout_gravity="center"
+                android:padding="03dp"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -36,16 +38,20 @@
             android:orientation="horizontal"
             android:layout_below="@id/l1"
             android:id="@+id/l2" android:layout_marginTop="-1dp">
-
-        <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-                  android:layout_marginTop="20dp"
-                  android:id="@+id/tvName" android:layout_marginBottom="50dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="600dp"/>
     </LinearLayout>
-    <Button
-            android:id="@+id/saveButton"
-            android:text="Zapisz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false" android:layout_marginTop="675dp"/>
+
+    <ImageView
+            android:id="@+id/addNewImage"
+            android:layout_width="53dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAllCaps="false"
+            android:layout_marginTop="660dp" android:layout_marginLeft="340dp" android:layout_marginStart="340dp"/>
 
 </RelativeLayout>

@@ -15,8 +15,6 @@ import com.example.shoppinglist.database.ShoppingList;
 
 import java.util.List;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder> {
 
     private Context context;
@@ -54,7 +52,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                v.getContext().startActivity(new Intent(v.getContext(), DetailShoppingListActivity.class));
 
             }
         });

@@ -1,5 +1,6 @@
 package com.example.shoppinglist.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,8 @@ public class RecipesFragment extends Fragment {
         addNewRecipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(v.getContext(), AddNewRecipe.class);
+                startActivity(intent);
             }
         });
     }
