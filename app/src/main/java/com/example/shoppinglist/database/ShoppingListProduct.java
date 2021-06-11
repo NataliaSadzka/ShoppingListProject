@@ -7,14 +7,14 @@ public class ShoppingListProduct {
 
     private long shoppingListId;
     private long productId;
-    private int quantity;
+    private double quantity;
     private boolean added;
 
     public ShoppingListProduct() {
 
     }
 
-    public ShoppingListProduct(long shoppingListId, long productId, int quantity, boolean added) {
+    public ShoppingListProduct(long shoppingListId, long productId, double quantity, boolean added) {
         this.shoppingListId = shoppingListId;
         this.productId = productId;
         this.quantity = quantity;
@@ -37,7 +37,7 @@ public class ShoppingListProduct {
         this.shoppingListId = shoppingListId;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -45,7 +45,7 @@ public class ShoppingListProduct {
         this.added = added;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 

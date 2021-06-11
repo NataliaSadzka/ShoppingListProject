@@ -18,6 +18,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract RecipeWithProductsDao recipeWithProductsDAO();
     public abstract ShoppingListWithProductsDao shoppingListWithProductsDAO();
     public abstract ShoppingListDao shoppingListDao();
+    public abstract ShoppingListProductDao shoppingListProductDao();
+
     private static AppDatabase INSTANCE;
 
     public static AppDatabase getDbInstance(final Context context) {
