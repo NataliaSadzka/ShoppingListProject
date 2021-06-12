@@ -16,11 +16,11 @@
         <!--Light Pink Color-->
 
         <TextView
-                android:layout_width="350dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
                 android:textSize="30sp"
-                android:textColor="#0E0E0E" android:layout_marginLeft="5dp" android:id="@+id/title"/>
+                android:textColor="#0E0E0E" android:layout_marginLeft="15dp" android:id="@+id/title"/>
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"

@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
+import com.example.shoppinglist.database.ShoppingListDao;
 
 import java.util.List;
 
@@ -34,7 +37,6 @@ public class ShoppingListFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
         AppDatabase db = AppDatabase.getDbInstance(this.getContext());
         shoppingLists = db.shoppingListDao().getAllShoppingLists();
         shoppingListAdapter = new ShoppingListAdapter(this.getContext(), shoppingLists);
@@ -47,11 +49,7 @@ public class ShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AddNewShoppingListActivity.class);
                 startActivity(intent);
-
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
             }
         });
-
     }
 }

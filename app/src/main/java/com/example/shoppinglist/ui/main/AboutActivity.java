@@ -23,6 +23,7 @@ public class AboutActivity extends Activity {
         setContentView(R.layout.about_activity);
 
         imageView = findViewById(R.id.image_view);
+        imageView.setVisibility(View.VISIBLE);
         backImage = findViewById(R.id.image_back);
         appTextView = findViewById(R.id.app_text_view);
         versionTextView = findViewById(R.id.version_text_view);

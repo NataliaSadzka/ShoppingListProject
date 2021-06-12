@@ -11,23 +11,21 @@
             android:id="@+id/product_auto_complete_text_view"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="36dp"
-            android:layout_marginTop="17dp"
             android:ems="10"
             android:dropDownWidth="match_parent"
             android:dropDownHeight="wrap_content"
             android:hint="Nazwa"
-    />
+            android:layout_marginVertical="40dp"/>
 
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:id="@+id/quantity_edit_text"
             android:layout_below="@+id/product_auto_complete_text_view"
             android:layout_marginLeft="36dp"
-            android:layout_marginTop="17dp"
             android:hint="Ile"
             android:inputType="numberDecimal"
-    />
+            android:layout_marginVertical="20dp"/>
 
     <Spinner
             android:id="@+id/quantity_unit_spinner"
@@ -36,25 +34,21 @@
             android:layout_below="@+id/quantity_edit_text"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="17dp"
-    />
+            android:layout_marginVertical="70dp"/>
 
     <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_back"
             android:id="@+id/image_back"
-            android:layout_marginTop="660dp"
-    />
+            android:layout_marginVertical="600dp"/>
 
     <Button
             android:text="Dodaj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_product_to_shopping_list_button"
-            android:layout_marginTop="660dp"
-            android:layout_marginLeft="220dp"
-            android:layout_marginStart="220dp"
             android:background="@color/blekit1"
-    />
+            android:layout_marginVertical="580dp" android:layout_marginHorizontal="165dp"/>
 
 </RelativeLayout>
