@@ -1,12 +1,33 @@
 package com.example.shoppinglist.database;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
-@Entity(primaryKeys = {"shoppingListId", "productId"})
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = ShoppingList.class,
+                parentColumns = {"shoppingListId"},
+                childColumns = {"shoppingListId"}
+        ),
+        @ForeignKey(
+                entity = Product.class,
+                parentColumns = {"productId"},
+                childColumns = {"productId"}
+        )
+})
 public class ShoppingListProduct {
 
-    private long shoppingListId;
-    private long productId;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @Embedded
+    private ShoppingList shoppingList;
+
+    @Embedded
+    private Product product;
+
     private double quantity;
     private boolean added;
 
@@ -14,27 +35,35 @@ public class ShoppingListProduct {
 
     }
 
-    public ShoppingListProduct(long shoppingListId, long productId, double quantity, boolean added) {
-        this.shoppingListId = shoppingListId;
-        this.productId = productId;
+    public ShoppingListProduct(ShoppingList shoppingList, Product product, double quantity, boolean added) {
+        this.shoppingList = shoppingList;
+        this.product = product;
         this.quantity = quantity;
         this.added = added;
     }
 
-    public long getProductId() {
-        return productId;
+    public int getId() {
+        return id;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public ShoppingList getShoppingList() {
+        return shoppingList;
     }
 
-    public long getShoppingListId() {
-        return shoppingListId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setShoppingListId(long shoppingListId) {
-        this.shoppingListId = shoppingListId;
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public void setQuantity(double quantity) {

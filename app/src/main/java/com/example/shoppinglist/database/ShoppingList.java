@@ -9,7 +9,7 @@ public class ShoppingList {
     @PrimaryKey(autoGenerate = true)
     private int shoppingListId;
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "title")
     private String name;
 
     public ShoppingList(int shoppingListId, String name) {

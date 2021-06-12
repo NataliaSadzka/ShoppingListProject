@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
+import com.example.shoppinglist.database.AppDatabase;
+import com.example.shoppinglist.database.ShoppingListProduct;
+
+import java.util.List;
 
 public class DetailShoppingListActivity extends Activity implements View.OnClickListener {
 
-    //private DetailShoppingListAdapter detailShoppingListAdapter;
-    //private List<Product> products;
+    private DetailShoppingListAdapter detailShoppingListAdapter;
+    private List<ShoppingListProduct> products;
 
     private Button saveButton;
     private Button cancelButton;
@@ -57,6 +62,14 @@ public class DetailShoppingListActivity extends Activity implements View.OnClick
                 imageEdit.setVisibility(View.INVISIBLE);
             }
         });*/
+        RecyclerView recyclerView  = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        AppDatabase db = AppDatabase.getDbInstance(getApplicationContext());
+        products = db.shoppingListProductDao().getAllShoppingListProducts();
+        detailShoppingListAdapter = new DetailShoppingListAdapter(getApplicationContext(), products);
+        recyclerView.setAdapter(detailShoppingListAdapter);
     }
 
     @Override

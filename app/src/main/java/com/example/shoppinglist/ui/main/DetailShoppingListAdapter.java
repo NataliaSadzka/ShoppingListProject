@@ -6,25 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
-import com.example.shoppinglist.database.Product;
+import com.example.shoppinglist.database.ShoppingListProduct;
 
 import java.util.List;
 
-/*public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppingListAdapter.MyViewHolder> {
+public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppingListAdapter.MyViewHolder> {
 
     private Context context;
-    private List<Product> products;
+    private List<ShoppingListProduct> products;
 
-    public DetailShoppingListAdapter(Context context, List<Product> products) {
+    public DetailShoppingListAdapter(Context context, List<ShoppingListProduct> products) {
         this.context = context;
         this.products = products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<ShoppingListProduct> products) {
         this.products = products;
         notifyDataSetChanged();
     }
@@ -39,7 +38,9 @@ import java.util.List;
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.checkBox.setText(this.products.get(position).getName());
+        holder.checkBox.setChecked(this.products.get(position).isAdded());
+        holder.checkBox.setText(this.products.get(0).getProduct().getName());
+        //holder.textViewName.setText(this.products.get(0).getProduct().getName());
     }
 
     @Override
@@ -47,21 +48,17 @@ import java.util.List;
         return this.products.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {*/
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        /*TextView textViewName;
         ImageView imageEdit;
-        ImageView addNew;*/
-        /*CheckBox checkBox;
+        ImageView addNew;
+        CheckBox checkBox;
 
         public MyViewHolder(View view) {
             super(view);
             checkBox = view.findViewById(R.id.checkBox);
-            /*textViewName = view.findViewById(R.id.textViewName);
             imageEdit = view.findViewById(R.id.image_delete);
-            addNew = view.findViewById(R.id.addNewImage);
+            addNew = view.findViewById(R.id.add_new_image);
         }
     }
-}*/
-
-
+}
