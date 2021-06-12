@@ -3,6 +3,8 @@ package com.example.shoppinglist.ui.main;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.Recipe;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.MyViewHolder> {
@@ -42,6 +45,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.textViewName.setText(this.recipeList.get(position).getName());
+        holder.imageDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(
+                        new Intent(v.getContext(), DetailRecipeListActivity.class)
+                                .putExtra("recipeList", recipeList.get(position)));
+
+            }
+        });
         holder.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -86,6 +98,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
 
         public MyViewHolder(View view) {
             super(view);
+            imageDetail = view.findViewById(R.id.image_detail);
             textViewName = view.findViewById(R.id.textViewName);
             imageDelete = view.findViewById(R.id.image_delete);
             //imageDelete.setVisibility(View.INVISIBLE);

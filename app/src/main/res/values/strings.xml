@@ -2,4 +2,12 @@
     <string name="app_name">ShoppingList</string>
     <string name="tab_text_1">Listy Zakupów</string>
     <string name="tab_text_2">Listy Przepisów</string>
+
+    <string-array name="units">
+        <item>szt.</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+    </string-array>
 </resources>

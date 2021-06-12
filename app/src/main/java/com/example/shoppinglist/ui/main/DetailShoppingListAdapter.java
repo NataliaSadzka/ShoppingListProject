@@ -74,15 +74,15 @@ public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageEdit;
+        ImageView imageDelete;
         ImageView addNew;
         CheckBox checkBox;
 
         public MyViewHolder(View view) {
             super(view);
-            checkBox = view.findViewById(R.id.checkBox);
-            imageEdit = view.findViewById(R.id.image_delete);
+            checkBox = view.findViewById(R.id.text_view_name);
             addNew = view.findViewById(R.id.add_new_image);
+            imageDelete = view.findViewById(R.id.image_delete);
         }
     }
 }

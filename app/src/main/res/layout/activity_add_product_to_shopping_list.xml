@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:context=".ui.main.AddProductToShoppingListActivity">
+
+    <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_auto_complete_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:dropDownWidth="match_parent"
+            android:dropDownHeight="wrap_content"
+            android:hint="Nazwa"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quantity_edit_text"
+            android:layout_below="@+id/product_auto_complete_text_view"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="17dp"
+            android:hint="Ile"
+            android:inputType="numberDecimal"
+    />
+
+    <Spinner
+            android:id="@+id/quantity_unit_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity_edit_text"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="17dp"
+    />
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back"
+            android:id="@+id/image_back"
+            android:layout_marginTop="660dp"
+    />
+
+    <Button
+            android:text="Dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_product_to_shopping_list_button"
+            android:layout_marginTop="660dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginStart="220dp"
+            android:background="@color/blekit1"
+    />
+
+</RelativeLayout>

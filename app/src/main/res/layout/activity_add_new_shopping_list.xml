@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="@color/blekit1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

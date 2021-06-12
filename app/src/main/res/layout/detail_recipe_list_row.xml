@@ -13,12 +13,11 @@
             android:background="@color/blekit"
             android:padding="12dp" android:layout_width="match_parent">
 
-        <CheckBox
-                android:text="CheckBox"
+        <TextView
+
                 android:layout_width="29dp"
                 android:layout_height="28dp" android:id="@+id/text_view_name" android:layout_weight="1"
                 android:textSize="20sp"/>
-
 
         <ImageView
                 android:id="@+id/image_delete"
@@ -26,6 +25,7 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_delete"
                 android:layout_gravity="center" android:padding="03dp"/>
+
     </LinearLayout>
 
 
