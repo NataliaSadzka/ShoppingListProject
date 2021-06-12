@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.Recipe;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class RecipesFragment extends Fragment {
         recipeListAdapter = new RecipeListAdapter(this.getContext(), recipes);
         recyclerView.setAdapter(recipeListAdapter);
 
-        addNewRecipeImage = view.findViewById(R.id.addNewImage);
+        addNewRecipeImage = view.findViewById(R.id.add_new_image);
 
         addNewRecipeImage.setOnClickListener(new View.OnClickListener() {
             @Override

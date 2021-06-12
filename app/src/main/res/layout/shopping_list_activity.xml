@@ -18,7 +18,7 @@
 
 
     <ImageView
-            android:id="@+id/addNewImage"
+            android:id="@+id/add_new_image"
             android:layout_width="53dp"
             android:layout_height="55dp"
             android:src="@drawable/ic_add"

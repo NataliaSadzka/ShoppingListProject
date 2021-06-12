@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
@@ -41,7 +40,7 @@ public class ShoppingListFragment extends Fragment {
         shoppingListAdapter = new ShoppingListAdapter(this.getContext(), shoppingLists);
         recyclerView.setAdapter(shoppingListAdapter);
 
-        addNewShoppingList = view.findViewById(R.id.addNewImage);
+        addNewShoppingList = view.findViewById(R.id.add_new_image);
 
         addNewShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override

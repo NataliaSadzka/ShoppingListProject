@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/l1"
-            android:background="@color/blekit">
+            android:background="@color/lightYellow">
         <!--Light Pink Color-->
 
         <TextView
@@ -21,7 +21,7 @@
                 android:text="Nazwa"
                 android:textAllCaps="true"
                 android:textSize="30sp"
-                android:textColor="#0E0E0E" android:layout_marginLeft="5dp" android:id="@+id/TextViewName"/>
+                android:textColor="#0E0E0E" android:layout_marginLeft="5dp" android:id="@+id/text_view_name"/>
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <ImageView
-            android:id="@+id/addNewImage"
+            android:id="@+id/add_new_image"
             android:layout_width="53dp"
             android:layout_height="55dp"
             android:src="@drawable/ic_add"
@@ -52,6 +52,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textAllCaps="false"
-            android:layout_marginTop="660dp" android:layout_marginLeft="340dp" android:layout_marginStart="340dp"/>
+            android:layout_marginTop="660dp"
+            android:layout_marginLeft="340dp"
+            android:layout_marginStart="340dp"/>
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back"
+            android:id="@+id/image_back"
+            android:layout_marginTop="660dp"/>
+    <Button
+            android:text="Anuluj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cancel_button"
+            android:layout_marginTop="660dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginStart="110dp"
+            android:background="@color/blekit1"/>
+    <Button
+            android:text="Zapisz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_button"
+            android:layout_marginTop="660dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginStart="220dp"
+            android:background="@color/blekit1"/>
 
 </RelativeLayout>
