@@ -11,7 +11,7 @@ public class Recipe {
     @PrimaryKey(autoGenerate = true)
     private int recipeId;
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "title")
     private String name;
 
     @ColumnInfo(name = "photo")

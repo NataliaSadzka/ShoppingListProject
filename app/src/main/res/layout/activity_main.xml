@@ -28,13 +28,20 @@
 
         />
 
-
+        <ImageView
+                android:id="@+id/image_help"
+                android:layout_width="50dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_help"
+        />
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabTextColor="@color/black"
-                android:background="@color/lightYellow"/>
+                android:background="@color/lightYellow"
+        app:tabTextColor="@color/black"/>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -43,7 +50,8 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </androidx.viewpager.widget.ViewPager>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               >
+    <!--Light Yellow Color-->
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/l1"
+            android:background="@color/lightYellow">
+        <!--Light Pink Color-->
+
+        <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:textSize="30sp"
+                android:textColor="#0E0E0E" android:layout_marginLeft="5dp" android:id="@+id/shopping_list_title"/>
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image_edit"
+                android:src="@drawable/ic_edit"
+                android:layout_gravity="center"
+                android:padding="03dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@id/l1"
+            android:id="@+id/l2" android:layout_marginTop="-1dp">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="520dp" android:id="@+id/recycler_view"/>
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/add_new_image"
+            android:layout_width="53dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAllCaps="false"
+            android:layout_marginTop="580dp"
+            android:layout_marginLeft="340dp"
+            android:layout_marginStart="340dp" android:layout_alignTop="@id/l1"/>
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back"
+            android:id="@+id/image_back"
+            android:layout_marginTop="600dp"/>
+    <Button
+            android:text="Anuluj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cancel_button"
+            android:layout_marginTop="580dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginStart="110dp"
+            android:background="@color/blekit1"/>
+    <Button
+            android:text="Zapisz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_button"
+            android:layout_marginTop="580dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginStart="220dp"
+            android:background="@color/blekit1"/>
+
+</RelativeLayout>

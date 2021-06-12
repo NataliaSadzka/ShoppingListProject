@@ -40,7 +40,7 @@ public class ShoppingListFragment extends Fragment {
         shoppingListAdapter = new ShoppingListAdapter(this.getContext(), shoppingLists);
         recyclerView.setAdapter(shoppingListAdapter);
 
-        addNewShoppingList = view.findViewById(R.id.addNewImage);
+        addNewShoppingList = view.findViewById(R.id.add_new_image);
 
         addNewShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +52,6 @@ public class ShoppingListFragment extends Fragment {
                         .setAction("Action", null).show();*/
             }
         });
+
     }
 }

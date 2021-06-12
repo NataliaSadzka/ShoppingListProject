@@ -18,6 +18,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract RecipeWithProductsDao recipeWithProductsDAO();
     public abstract ShoppingListWithProductsDao shoppingListWithProductsDAO();
     public abstract ShoppingListDao shoppingListDao();
+    public abstract ShoppingListProductDao shoppingListProductDao();
+
     private static AppDatabase INSTANCE;
 
     public static AppDatabase getDbInstance(final Context context) {
@@ -35,6 +37,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     INSTANCE.recipeDao().insertRecipe(INSTANCE.recipes);
                                     INSTANCE.shoppingListDao().insertShoppingList(INSTANCE.shoppingLists);
                                     INSTANCE.recipeProductDao().insertRecipeProduct(INSTANCE.chiliConCarneRecipe);
+                                    INSTANCE.shoppingListProductDao().insertShoppingListProduct(INSTANCE.shoppingListProducts);
                                 }
                             });
                         }
@@ -67,12 +70,18 @@ public abstract class AppDatabase extends RoomDatabase {
             new ShoppingList(2, "Grill")
     };
 
+    ShoppingListProduct[] shoppingListProducts = new ShoppingListProduct[] {
+            new ShoppingListProduct(shoppingLists[0], products[0], 12, false),
+            new ShoppingListProduct(shoppingLists[0], products[1], 4, false),
+            new ShoppingListProduct(shoppingLists[0], products[2], 1, false)
+    };
+
     RecipeProduct[] chiliConCarneRecipe = new RecipeProduct[] {
-            new RecipeProduct(1, 4, 0.4),
-            new RecipeProduct(1, 5, 1),
-            new RecipeProduct(1, 6, 1),
-            new RecipeProduct(1, 7, 0.1),
-            new RecipeProduct(1, 8, 0.1),
-            new RecipeProduct(1, 9, 1)
+            new RecipeProduct(recipes[0], products[3], 0.4),
+            new RecipeProduct(recipes[0], products[4], 1),
+            new RecipeProduct(recipes[0], products[5], 1),
+            new RecipeProduct(recipes[0], products[6], 0.1),
+            new RecipeProduct(recipes[0], products[7], 0.1),
+            new RecipeProduct(recipes[0], products[8], 1)
     };
 }
