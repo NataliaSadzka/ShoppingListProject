@@ -77,11 +77,11 @@ public abstract class AppDatabase extends RoomDatabase {
     };
 
     RecipeProduct[] chiliConCarneRecipe = new RecipeProduct[] {
-            new RecipeProduct(1, 4, 0.4),
-            new RecipeProduct(1, 5, 1),
-            new RecipeProduct(1, 6, 1),
-            new RecipeProduct(1, 7, 0.1),
-            new RecipeProduct(1, 8, 0.1),
-            new RecipeProduct(1, 9, 1)
+            new RecipeProduct(recipes[0], products[3], 0.4),
+            new RecipeProduct(recipes[0], products[4], 1),
+            new RecipeProduct(recipes[0], products[5], 1),
+            new RecipeProduct(recipes[0], products[6], 0.1),
+            new RecipeProduct(recipes[0], products[7], 0.1),
+            new RecipeProduct(recipes[0], products[8], 1)
     };
 }

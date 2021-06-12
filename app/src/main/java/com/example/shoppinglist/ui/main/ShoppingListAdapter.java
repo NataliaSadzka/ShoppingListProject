@@ -52,7 +52,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), DetailShoppingListActivity.class));
+                v.getContext().startActivity(
+                        new Intent(v.getContext(), DetailShoppingListActivity.class)
+                                .putExtra("shoppingList", shoppingLists.get(position)));
 
             }
         });

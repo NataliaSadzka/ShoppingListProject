@@ -1,38 +1,67 @@
 package com.example.shoppinglist.database;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
-@Entity(primaryKeys = {"recipeId", "productId"})
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = Recipe.class,
+                parentColumns = {"recipeId"},
+                childColumns = {"recipeId"}
+        ),
+        @ForeignKey(
+                entity = Product.class,
+                parentColumns = {"productId"},
+                childColumns = {"productId"}
+        )
+})
 public class RecipeProduct {
 
-    private long recipeId;
-    private long productId;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @Embedded
+    private Recipe recipe;
+
+    @Embedded
+    private Product product;
+
     private double quantity;
 
     public RecipeProduct() {
 
     }
 
-    public RecipeProduct(long recipeId, long productId, double quantity) {
-        this.recipeId = recipeId;
-        this.productId = productId;
+    public RecipeProduct(Recipe recipe, Product product, double quantity) {
+        this.recipe = recipe;
+        this.product = product;
         this.quantity = quantity;
     }
 
-    public long getProductId() {
-        return productId;
+    public int getId() {
+        return id;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public long getRecipeId() {
-        return recipeId;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setRecipeId(long recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public double getQuantity() {

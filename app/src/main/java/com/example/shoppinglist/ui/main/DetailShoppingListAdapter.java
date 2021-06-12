@@ -1,14 +1,17 @@
 package com.example.shoppinglist.ui.main;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
+import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingListProduct;
 
 import java.util.List;
@@ -37,11 +40,32 @@ public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.checkBox.setChecked(this.products.get(position).isAdded());
-        holder.checkBox.setText(this.products.get(0).getProduct().getName());
-        //holder.textViewName.setText(this.products.get(0).getProduct().getName());
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        final ShoppingListProduct product = products.get(position);
+        holder.checkBox.setChecked(product.isAdded());
+        holder.checkBox.setText(product.getProduct().getName() + " " + product.getQuantity() + " " + product.getProduct().getQuantityUnit());
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                product.setAdded(isChecked);
+                setPaintFlags(holder.checkBox, isChecked);
+
+                AppDatabase.getDbInstance(context).shoppingListProductDao().insertShoppingListProduct(product);
+            }
+        });
+
+        setPaintFlags(holder.checkBox, product.isAdded());
     }
+
+    private void setPaintFlags(CheckBox checkBox, boolean isChecked) {
+        if (isChecked) {
+            checkBox.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            checkBox.setPaintFlags(0);
+        }
+    }
+
 
     @Override
     public int getItemCount() {
