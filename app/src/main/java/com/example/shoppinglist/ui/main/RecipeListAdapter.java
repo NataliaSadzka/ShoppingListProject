@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
-import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.Recipe;
+import com.example.shoppinglist.database.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -48,12 +46,19 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
         holder.imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RecipeWithProducts recipeWithProducts = AppDatabase.getDbInstance(v.getContext()).recipeWithProductsDao().findRecipeWithProductsByRecipeId(recipeList.get(position).getRecipeId());
+
+                if (recipeWithProducts.getRecipes() == null) {
+                    Recipe recipe = AppDatabase.getDbInstance(v.getContext()).recipeDao().findRecipeByRecipeId(recipeList.get(position).getRecipeId());
+                    recipeWithProducts.setRecipes(recipe);
+                }
+
                 v.getContext().startActivity(
                         new Intent(v.getContext(), DetailRecipeListActivity.class)
-                                .putExtra("recipeList", recipeList.get(position)));
-
+                                .putExtra("recipeList", recipeWithProducts));
             }
         });
+
         holder.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

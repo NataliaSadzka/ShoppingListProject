@@ -1,6 +1,5 @@
 package com.example.shoppinglist.ui.main;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +11,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
-import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.Recipe;
-import com.example.shoppinglist.database.RecipeProduct;
-import com.example.shoppinglist.database.ShoppingList;
+import com.example.shoppinglist.database.*;
 
 import java.util.List;
 
 public class DetailRecipeListActivity extends Activity {
 
     private DetailRecipeListAdapter detailRecipeListAdapter;
-    private List<RecipeProduct> recipeProducts;
+    private RecipeWithProducts recipe;
+    private List<RecipeProduct> products;
 
     private TextView recipeTitleTextView;
     private Button saveButton;
@@ -36,7 +33,7 @@ public class DetailRecipeListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_recipe_list_activity);
 
-        Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipeList");
+        recipe = (RecipeWithProducts) getIntent().getSerializableExtra("recipeList");
 
         recipeTitleTextView = findViewById(R.id.title);
 
@@ -50,15 +47,16 @@ public class DetailRecipeListActivity extends Activity {
         cancelButton.setVisibility(View.INVISIBLE);
         addNewImage.setVisibility(View.INVISIBLE);
 
-        RecyclerView recyclerView  = findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView  = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
-        recipeTitleTextView.setText(recipe.getName());
+        recipeTitleTextView.setText(recipe.getRecipes().getName());
 
         AppDatabase db = AppDatabase.getDbInstance(getApplicationContext());
-        recipeProducts = db.recipeProductDao().getAllRecipeProducts();
-        detailRecipeListAdapter = new DetailRecipeListAdapter(getApplicationContext(), recipeProducts);
+
+        products = recipe.getProducts();
+        detailRecipeListAdapter = new DetailRecipeListAdapter(getApplicationContext(), products);
         recyclerView.setAdapter(detailRecipeListAdapter);
 
         backImage.setOnClickListener(new View.OnClickListener() {

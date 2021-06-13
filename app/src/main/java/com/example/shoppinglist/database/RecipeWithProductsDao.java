@@ -12,4 +12,8 @@ public interface RecipeWithProductsDao {
     @Query("SELECT * FROM Recipe")
     List<RecipeWithProducts> getRecipeWithProducts();
 
+    @Transaction
+    @Query("SELECt * FROM Recipe sl left join RecipeProduct slp on sl.recipeId = slp.recipeId where sl.recipeId = :recipeId")
+    RecipeWithProducts findRecipeWithProductsByRecipeId(int recipeId);
 }
+

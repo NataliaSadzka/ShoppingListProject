@@ -1,24 +1,16 @@
 package com.example.shoppinglist.ui.main;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
-
-import java.util.List;
 
 public class AddNewShoppingListActivity extends Activity {
 
@@ -30,6 +22,14 @@ public class AddNewShoppingListActivity extends Activity {
         setContentView(R.layout.activity_add_new_shopping_list);
 
         final EditText textViewName = findViewById(R.id.textViewName);
+        ImageView backImage = findViewById(R.id.image_back);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddNewShoppingListActivity.this, ShoppingListFragment.class);
+                finish();
+            }
+        });
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

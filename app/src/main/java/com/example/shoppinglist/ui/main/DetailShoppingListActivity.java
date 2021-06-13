@@ -65,7 +65,6 @@ public class DetailShoppingListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailShoppingListActivity.this, ShoppingListFragment.class);
-                startActivity(intent);
                 finish();
             }
         });

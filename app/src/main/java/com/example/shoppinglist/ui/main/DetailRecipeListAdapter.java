@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.RecipeProduct;
-import com.example.shoppinglist.database.ShoppingListProduct;
 
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
 
     @NonNull
     @Override
-    public DetailRecipeListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_recipe_list_row, parent, false);
 
         return new MyViewHolder(view);
@@ -43,17 +40,17 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
     @Override
     public void onBindViewHolder(@NonNull DetailRecipeListAdapter.MyViewHolder holder, int position) {
         final RecipeProduct recipeProduct = recipeProducts.get(position);
-        holder.textViewName.setText(recipeProduct.toString());
+        //holder.textViewName.setText(recipeProduct.toString());
         holder.textViewName.setText(recipeProduct.getProduct().getName() + " " + recipeProduct.getQuantity() + " " + recipeProduct.getProduct().getQuantityUnit());
 
-        holder.textViewName.setOnClickListener(new View.OnClickListener() {
+        /*holder.textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recipeProduct.toString();
 
                 AppDatabase.getDbInstance(context).recipeProductDao().insertRecipeProduct(recipeProduct);
             }
-        });
+        });*/
     }
 
 

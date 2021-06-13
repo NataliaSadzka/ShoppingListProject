@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = Recipe.class,
@@ -17,7 +19,7 @@ import androidx.room.PrimaryKey;
                 childColumns = {"productId"}
         )
 })
-public class RecipeProduct {
+public class RecipeProduct implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
