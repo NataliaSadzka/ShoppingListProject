@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
+import com.example.shoppinglist.database.ShoppingListProduct;
 import com.example.shoppinglist.database.ShoppingListWithProducts;
 
 import java.util.List;
@@ -59,6 +60,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                     ShoppingList shoppingList = AppDatabase.getDbInstance(v.getContext()).shoppingListDao().findShoppingListByShoppingListId(shoppingLists.get(position).getShoppingListId());
                     shoppingListWithProducts.setShoppingList(shoppingList);
                 }
+
+                List<ShoppingListProduct> shoppingListProducts = AppDatabase.getDbInstance(v.getContext()).shoppingListProductDao().findShoppingListProductsByShoppingListId(shoppingListWithProducts.getShoppingList().getShoppingListId());
+                shoppingListWithProducts.setProducts(shoppingListProducts);
 
                 v.getContext().startActivity(
                         new Intent(v.getContext(), DetailShoppingListActivity.class)

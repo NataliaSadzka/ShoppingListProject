@@ -20,6 +20,7 @@ public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppi
 
     private Context context;
     private List<ShoppingListProduct> products;
+    private boolean editMode = false;
 
     public DetailShoppingListAdapter(Context context, List<ShoppingListProduct> products) {
         this.context = context;
@@ -83,6 +84,17 @@ public class DetailShoppingListAdapter extends RecyclerView.Adapter<DetailShoppi
             checkBox = view.findViewById(R.id.text_view_name);
             addNew = view.findViewById(R.id.add_new_image);
             imageDelete = view.findViewById(R.id.image_delete);
+
+            if (editMode) {
+                imageDelete.setVisibility(View.VISIBLE);
+            } else {
+                imageDelete.setVisibility(View.INVISIBLE);
+            }
         }
+    }
+
+    public void switchMode(boolean editMode) {
+        this.editMode = editMode;
+        notifyDataSetChanged();;
     }
 }

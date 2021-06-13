@@ -26,7 +26,6 @@ public class AddNewShoppingListActivity extends Activity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddNewShoppingListActivity.this, ShoppingListFragment.class);
                 finish();
             }
         });

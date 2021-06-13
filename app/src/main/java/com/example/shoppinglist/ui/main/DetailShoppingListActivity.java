@@ -20,6 +20,7 @@ import java.util.List;
 public class DetailShoppingListActivity extends Activity {
 
     private DetailShoppingListAdapter detailShoppingListAdapter;
+    private RecyclerView recyclerView;
     private ShoppingListWithProducts shoppingList;
     private List<ShoppingListProduct> products;
 
@@ -51,7 +52,7 @@ public class DetailShoppingListActivity extends Activity {
         cancelButton.setVisibility(View.INVISIBLE);
         addNewImage.setVisibility(View.INVISIBLE);
 
-        final RecyclerView recyclerView  = findViewById(R.id.recycler_view);
+        recyclerView  = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
@@ -64,7 +65,6 @@ public class DetailShoppingListActivity extends Activity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailShoppingListActivity.this, ShoppingListFragment.class);
                 finish();
             }
         });
@@ -73,6 +73,15 @@ public class DetailShoppingListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchMode(true);
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchMode(false);
+
+                AppDatabase.getDbInstance(v.getContext()).shoppingListProductDao().insertShoppingListProduct(products.stream().toArray(ShoppingListProduct[]::new));
             }
         });
 
@@ -113,5 +122,9 @@ public class DetailShoppingListActivity extends Activity {
             cancelButton.setVisibility(View.INVISIBLE);
             addNewImage.setVisibility(View.INVISIBLE);
         }
+
+        detailShoppingListAdapter = new DetailShoppingListAdapter(getApplicationContext(), products);
+        detailShoppingListAdapter.switchMode(editMode);
+        recyclerView.setAdapter(detailShoppingListAdapter);
     }
 }

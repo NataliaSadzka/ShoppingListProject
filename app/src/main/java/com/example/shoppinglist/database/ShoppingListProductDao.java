@@ -17,4 +17,7 @@ public interface ShoppingListProductDao {
 
     @Query("SELECT * FROM ShoppingListProduct WHERE shoppingListId = :shoppingListId")
     ShoppingListProduct findShoppingListByShoppingListId(int shoppingListId);
+
+    @Query("SELECT * FROM ShoppingListProduct WHERE shoppingListId = :shoppingListId")
+    List<ShoppingListProduct> findShoppingListProductsByShoppingListId(int shoppingListId);
 }

@@ -7,11 +7,14 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = ShoppingList.class,
                 parentColumns = {"shoppingListId"},
-                childColumns = {"shoppingListId"}
+                childColumns = {"shoppingListId"},
+                onDelete = CASCADE
         ),
         @ForeignKey(
                 entity = Product.class,

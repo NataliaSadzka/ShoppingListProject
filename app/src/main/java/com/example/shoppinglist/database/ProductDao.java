@@ -13,7 +13,7 @@ public interface ProductDao {
     List<Product> getAllProducts();
 
     @Insert
-    void insertProduct(Product... products);
+    long[] insertProduct(Product... products);
 
     @Delete
     void delete(Product product);
