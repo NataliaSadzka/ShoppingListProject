@@ -17,4 +17,7 @@ public interface ShoppingListDao {
 
     @Delete
     void delete(ShoppingList shoppingList);
+
+    @Query("SELECT * FROM SHOPPINGLIST where shoppingListId = :shoppingListId")
+    ShoppingList findShoppingListByShoppingListId(int shoppingListId);
 }

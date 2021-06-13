@@ -3,7 +3,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:tools="http://schemas.android.com/tools"
-                tools:context=".ui.main.AddProductToShoppingListActivity">
+                tools:context=".ui.main.AddProductToShoppingListActivity"
+                android:background="@color/lightYellow">
 
     <AutoCompleteTextView
             android:layout_width="wrap_content"

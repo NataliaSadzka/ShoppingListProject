@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
+import com.example.shoppinglist.database.ShoppingListWithProducts;
 
 import java.util.List;
 
@@ -52,10 +53,17 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ShoppingListWithProducts shoppingListWithProducts = AppDatabase.getDbInstance(v.getContext()).shoppingListWithProductsDAO().findShoppingListWithProductsByShoppingListId(shoppingLists.get(position).getShoppingListId());
+
+                if (shoppingListWithProducts.getShoppingList() == null) {
+                    ShoppingList shoppingList = AppDatabase.getDbInstance(v.getContext()).shoppingListDao().findShoppingListByShoppingListId(shoppingLists.get(position).getShoppingListId());
+                    shoppingListWithProducts.setShoppingList(shoppingList);
+                }
+
                 v.getContext().startActivity(
                         new Intent(v.getContext(), DetailShoppingListActivity.class)
-                                .putExtra("shoppingList", shoppingLists.get(position)));
-
+                                .putExtra("editMode", false)
+                                .putExtra("shoppingList", shoppingListWithProducts));
             }
         });
     }

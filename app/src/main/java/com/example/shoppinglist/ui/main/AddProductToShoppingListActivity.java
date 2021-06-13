@@ -1,15 +1,13 @@
 package com.example.shoppinglist.ui.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.shoppinglist.R;
-import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.Product;
-import com.example.shoppinglist.database.ShoppingList;
-import com.example.shoppinglist.database.ShoppingListProduct;
+import com.example.shoppinglist.database.*;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class AddProductToShoppingListActivity extends Activity {
 
     boolean existingProduct = false;
     Product product;
-    ShoppingList shoppingList;
+    ShoppingListWithProducts shoppingList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,14 @@ public class AddProductToShoppingListActivity extends Activity {
         backImageView = findViewById(R.id.image_back);
         addProductButton = findViewById(R.id.add_product_to_shopping_list_button);
 
-        shoppingList = (ShoppingList) getIntent().getSerializableExtra("shoppingList");
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductToShoppingListActivity.this, DetailShoppingListActivity.class);
+                finish();
+            }
+        });
+        shoppingList = (ShoppingListWithProducts) getIntent().getSerializableExtra("shoppingList");
 
         List<Product> products = AppDatabase.getDbInstance(getApplicationContext()).productDao().getAllProducts();
 
@@ -63,11 +68,15 @@ public class AddProductToShoppingListActivity extends Activity {
                 if (existingProduct) {
                     ShoppingListProduct shoppingListProduct = new ShoppingListProduct();
                     shoppingListProduct.setProduct(product);
-                    shoppingListProduct.setShoppingList(shoppingList);
+                    shoppingListProduct.setShoppingList(shoppingList.getShoppingList());
                     shoppingListProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
                     shoppingListProduct.setAdded(false);
 
-                    AppDatabase.getDbInstance(getApplicationContext()).shoppingListProductDao().insertShoppingListProduct(shoppingListProduct);
+                    shoppingList.getProducts().add(shoppingListProduct);
+                    Intent intent = new Intent(getApplicationContext(), DetailShoppingListActivity.class);
+                    intent.putExtra("editMode", true);
+                    intent.putExtra("shoppingList", shoppingList);
+                    startActivity(intent);
                     finish();
                 } else {
 

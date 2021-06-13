@@ -65,7 +65,7 @@ public class DetailRecipeListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailRecipeListActivity.this, RecipeListAdapter.class);
-                startActivity(intent);
+                finish();
             }
         });
 

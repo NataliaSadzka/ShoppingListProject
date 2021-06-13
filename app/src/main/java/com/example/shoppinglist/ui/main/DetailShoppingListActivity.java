@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.ShoppingList;
 import com.example.shoppinglist.database.ShoppingListProduct;
+import com.example.shoppinglist.database.ShoppingListWithProducts;
 
 import java.util.List;
 
 public class DetailShoppingListActivity extends Activity {
 
     private DetailShoppingListAdapter detailShoppingListAdapter;
+    private ShoppingListWithProducts shoppingList;
     private List<ShoppingListProduct> products;
 
     private TextView shoppingListTitleTextView;
@@ -34,7 +35,9 @@ public class DetailShoppingListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_shopping_list_activity);
 
-        ShoppingList shoppingList = (ShoppingList) getIntent().getSerializableExtra("shoppingList");
+        AppDatabase db = AppDatabase.getDbInstance(getApplicationContext());
+
+        shoppingList = (ShoppingListWithProducts) getIntent().getSerializableExtra("shoppingList");
 
         shoppingListTitleTextView = findViewById(R.id.shopping_list_title);
 
@@ -48,14 +51,13 @@ public class DetailShoppingListActivity extends Activity {
         cancelButton.setVisibility(View.INVISIBLE);
         addNewImage.setVisibility(View.INVISIBLE);
 
-        RecyclerView recyclerView  = findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView  = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
-        shoppingListTitleTextView.setText(shoppingList.getName());
+        shoppingListTitleTextView.setText(shoppingList.getShoppingList().getName());
 
-        AppDatabase db = AppDatabase.getDbInstance(getApplicationContext());
-        products = db.shoppingListProductDao().getAllShoppingListProducts();
+        products = shoppingList.getProducts();
         detailShoppingListAdapter = new DetailShoppingListAdapter(getApplicationContext(), products);
         recyclerView.setAdapter(detailShoppingListAdapter);
 
@@ -64,6 +66,7 @@ public class DetailShoppingListActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(DetailShoppingListActivity.this, ShoppingListFragment.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -78,8 +81,23 @@ public class DetailShoppingListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchMode(false);
+                shoppingList = AppDatabase.getDbInstance(v.getContext()).shoppingListWithProductsDAO().findShoppingListWithProductsByShoppingListId(shoppingList.getShoppingList().getShoppingListId());
+                products = shoppingList.getProducts();
+                detailShoppingListAdapter = new DetailShoppingListAdapter(getApplicationContext(), products);
+                recyclerView.setAdapter(detailShoppingListAdapter);
             }
         });
+
+        addNewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(
+                        new Intent(v.getContext(), AddProductToShoppingListActivity.class)
+                                .putExtra("shoppingList", shoppingList));
+            }
+        });
+
+        switchMode(getIntent().getBooleanExtra("editMode", false));
     }
 
     public void switchMode(boolean editMode) {
