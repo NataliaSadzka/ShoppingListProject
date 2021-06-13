@@ -16,5 +16,5 @@ public interface ShoppingListProductDao {
     void delete(ShoppingListProduct shoppingListProduct);
 
     @Query("SELECT * FROM ShoppingListProduct WHERE shoppingListId = :shoppingListId")
-    List<ShoppingListProduct> getAllShoppingListProductsByShoppingList(int shoppingListId);
+    ShoppingListProduct findShoppingListByShoppingListId(int shoppingListId);
 }
