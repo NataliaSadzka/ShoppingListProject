@@ -42,8 +42,16 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
     public void onBindViewHolder(@NonNull DetailRecipeListAdapter.MyViewHolder holder, int position) {
         final RecipeProduct recipeProduct = recipeProducts.get(position);
         holder.textViewName.setText(recipeProduct.getProduct().getName() + " " + recipeProduct.getQuantity() + " " + recipeProduct.getProduct().getQuantityUnit());
-    }
 
+        holder.imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppDatabase db = AppDatabase.getDbInstance(v.getContext());
+                db.recipeProductDao().delete(recipeProducts.get(position));
+            }
+        });
+
+    }
 
     @Override
     public int getItemCount() {

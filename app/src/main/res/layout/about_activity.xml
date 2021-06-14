@@ -6,20 +6,21 @@
                 android:background="@color/lightYellow">
 
     <TextView
-            android:text="Aplkacja służy do robienia list zakupów oraz przepisów."
+            android:text="Aplikacja służy do robienia list zakupów oraz przepisów."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/app_text_view"
-            android:layout_marginHorizontal="20dp" android:layout_marginVertical="300dp" android:textSize="20sp"
+            android:layout_marginHorizontal="20dp" android:layout_marginVertical="380dp" android:textSize="20sp"
             android:textColor="#151515"/>
     <TextView
             android:text="Wersja aplikacji: 1.0.0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/version_text_view" android:layout_marginVertical="390dp"
+            android:layout_height="wrap_content" android:id="@+id/version_text_view"
+            android:layout_marginVertical="460dp"
             android:textSize="20sp" android:layout_marginHorizontal="20dp" android:textColor="#191818"/>
     <TextView
             android:text="Autor: Natalia Sadzka"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_marginVertical="460dp"
+            android:layout_height="wrap_content" android:layout_marginVertical="520dp"
             android:textSize="20sp" android:layout_marginHorizontal="20dp" android:textColor="#121111"
             android:id="@+id/author_text_view"/>
 
@@ -31,8 +32,20 @@
             android:layout_marginTop="600dp"/>
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="300dp" app:srcCompat="@drawable/przepisy" android:id="@+id/image_view"
-            android:layout_marginHorizontal="25dp" android:src="@drawable/przepisy"/>
+            android:layout_height="250dp"
+            android:id="@+id/image_view"
+            android:layout_marginHorizontal="25dp"
+            android:src="@drawable/lista" android:layout_marginVertical="10dp"/>
+    <TextView
+            android:text="Lista Zakupów"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView" android:layout_marginHorizontal="140dp"
+            android:layout_marginVertical="265dp" android:textSize="19sp" android:textColor="#0E0E0E"/>
+    <TextView
+            android:text="Zapisujesz aby nie zapomnieć o kupnie czegoś, ale o wzięciu kartki to już ty musisz pamiętać."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView2" android:textSize="16sp"
+            android:textColor="#0C0C0C" android:layout_marginHorizontal="20dp" android:layout_marginVertical="300dp"/>
 
 
 </RelativeLayout>

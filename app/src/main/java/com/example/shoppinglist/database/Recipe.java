@@ -52,4 +52,9 @@ public class Recipe implements Serializable {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

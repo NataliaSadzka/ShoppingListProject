@@ -1,18 +1,23 @@
 package com.example.shoppinglist.ui.main;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailRecipeListActivity extends Activity {
@@ -21,6 +26,7 @@ public class DetailRecipeListActivity extends Activity {
     private RecyclerView recyclerView;
     private RecipeWithProducts recipe;
     private List<RecipeProduct> products;
+    private List<RecipeProduct> productsToDelete = new ArrayList<>();
 
     private TextView recipeTitleTextView;
     private Button saveButton;
@@ -126,4 +132,78 @@ public class DetailRecipeListActivity extends Activity {
         detailRecipeListAdapter.switchMode(editMode);
         recyclerView.setAdapter(detailRecipeListAdapter);
     }
+
+    public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeListAdapter.MyViewHolder> {
+
+        private Context context;
+        private List<RecipeProduct> recipeProducts;
+        private boolean editMode = false;
+
+        public DetailRecipeListAdapter(Context context, List<RecipeProduct> recipeProducts) {
+            this.context = context;
+            this.recipeProducts = recipeProducts;
+        }
+
+        public void setProducts(List<RecipeProduct> recipeProducts) {
+            this.recipeProducts = recipeProducts;
+            notifyDataSetChanged();
+        }
+
+        @NonNull
+        @Override
+        public DetailRecipeListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_recipe_list_row, parent, false);
+
+            return new DetailRecipeListAdapter.MyViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull DetailRecipeListAdapter.MyViewHolder holder, int position) {
+            final RecipeProduct product = recipeProducts.get(position);
+            holder.textViewName.setText(product.getProduct().getName() + " " + product.getQuantity() + " " + product.getProduct().getQuantityUnit());
+
+            holder.imageDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    productsToDelete.add(product);
+                    products.remove(product);
+                    notifyDataSetChanged();
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return recipeProducts.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+
+            ImageView imageEdit;
+            ImageView addNew;
+            TextView textViewName;
+            ImageView imageDelete;
+
+            public MyViewHolder(View view) {
+                super(view);
+                textViewName = view.findViewById(R.id.text_view_name);
+                imageEdit = view.findViewById(R.id.image_delete);
+                addNew = view.findViewById(R.id.add_new_image);
+                imageDelete = view.findViewById(R.id.image_delete);
+
+                if (editMode) {
+                    imageDelete.setVisibility(View.VISIBLE);
+                } else {
+                    imageDelete.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+
+        public void switchMode(boolean editMode) {
+            this.editMode = editMode;
+            notifyDataSetChanged();
+        }
+    }
+
 }

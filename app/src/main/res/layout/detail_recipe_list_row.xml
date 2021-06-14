@@ -10,7 +10,7 @@
     <LinearLayout
             android:id="@+id/layoutRow"
             android:layout_height="50dp"
-            android:background="@color/blekit"
+            android:background="@color/blue3"
             android:padding="12dp" android:layout_width="match_parent">
 
         <TextView

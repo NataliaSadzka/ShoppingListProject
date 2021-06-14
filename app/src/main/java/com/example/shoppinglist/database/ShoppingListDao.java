@@ -13,7 +13,7 @@ public interface ShoppingListDao {
     List<ShoppingList> getAllShoppingLists();
 
     @Insert
-    void insertShoppingList(ShoppingList... shoppingLists);
+    long[] insertShoppingList(ShoppingList... shoppingLists);
 
     @Delete
     void delete(ShoppingList shoppingList);

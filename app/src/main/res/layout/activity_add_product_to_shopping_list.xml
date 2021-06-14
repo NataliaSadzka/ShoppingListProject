@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_product_to_recipe_button"
-            android:background="@color/blekit1"
+            android:background="@color/green1"
             android:layout_marginVertical="580dp" android:layout_marginHorizontal="165dp"/>
 
 </RelativeLayout>

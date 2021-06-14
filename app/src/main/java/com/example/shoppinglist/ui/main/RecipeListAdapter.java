@@ -59,6 +59,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
             }
         });
 
+        holder.imageShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(
+                        new Intent(v.getContext(), AddRecipeToShoppingListActivity.class)
+                                .putExtra("recipe", recipeList.get(position)));
+            }
+        });
+
         holder.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -106,6 +115,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.My
             imageDetail = view.findViewById(R.id.image_detail);
             textViewName = view.findViewById(R.id.textViewName);
             imageDelete = view.findViewById(R.id.image_delete);
+            imageShopping = view.findViewById(R.id.image_shopping);
             //imageDelete.setVisibility(View.INVISIBLE);
         }
     }
