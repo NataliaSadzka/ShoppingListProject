@@ -31,6 +31,7 @@ public class RecipeProduct implements Serializable {
     private Product product;
 
     private double quantity;
+    private boolean added;
 
     public RecipeProduct() {
 
@@ -72,5 +73,13 @@ public class RecipeProduct implements Serializable {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isAdded() {
+        return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
     }
 }

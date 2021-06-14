@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.example.shoppinglist.R;
-import com.example.shoppinglist.database.AppDatabase;
-import com.example.shoppinglist.database.Product;
-import com.example.shoppinglist.database.ShoppingListProduct;
-import com.example.shoppinglist.database.ShoppingListWithProducts;
+import com.example.shoppinglist.database.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class AddProductToShoppingListActivity extends Activity {
+public class AddProductToRecipeActivity extends Activity {
 
     private AutoCompleteTextView productAutoCompleteTextView;
     private EditText quantityEditText;
@@ -24,12 +21,12 @@ public class AddProductToShoppingListActivity extends Activity {
 
     boolean existingProduct = false;
     Product product;
-    ShoppingListWithProducts shoppingList;
+    RecipeWithProducts recipeWithProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product_to_shopping_list);
+        setContentView(R.layout.activity_add_product_to_recipe);
 
         productAutoCompleteTextView = findViewById(R.id.product_auto_complete_text_view);
         quantityEditText = findViewById(R.id.quantity_edit_text);
@@ -43,13 +40,14 @@ public class AddProductToShoppingListActivity extends Activity {
                 finish();
             }
         });
-        shoppingList = (ShoppingListWithProducts) getIntent().getSerializableExtra("shoppingList");
+
+        recipeWithProducts = (RecipeWithProducts) getIntent().getSerializableExtra("recipeList");
 
         List<Product> products = AppDatabase.getDbInstance(getApplicationContext()).productDao().getAllProducts();
 
-        ArrayAdapter<Product> productsAdapter = new ArrayAdapter<Product>(this, android.R.layout.simple_dropdown_item_1line, products);
+        ArrayAdapter<Product> productAdapter = new ArrayAdapter<Product>(this, android.R.layout.simple_dropdown_item_1line, products);
         productAutoCompleteTextView.setThreshold(1);
-        productAutoCompleteTextView.setAdapter(productsAdapter);
+        productAutoCompleteTextView.setAdapter(productAdapter);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.units, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,31 +69,31 @@ public class AddProductToShoppingListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (existingProduct) {
-                    addProductToShoppingList(product);
+                    addProductToRecipe(product);
                 } else {
                     Product product = new Product();
                     product.setName(productAutoCompleteTextView.getText().toString());
                     product.setQuantityUnit(quantityUnitSpinner.getSelectedItem().toString());
                     product.setProductId((int) AppDatabase.getDbInstance(v.getContext()).productDao().insertProduct(product)[0]);
 
-                    addProductToShoppingList(product);
+                    addProductToRecipe(product);
                 }
             }
         });
     }
 
-    private void addProductToShoppingList(Product product) {
-        ShoppingListProduct shoppingListProduct = new ShoppingListProduct();
-        shoppingListProduct.setProduct(product);
-        shoppingListProduct.setShoppingList(shoppingList.getShoppingList());
-        shoppingListProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
-        shoppingListProduct.setAdded(false);
+    private void addProductToRecipe(Product product) {
+        RecipeProduct recipeProduct = new RecipeProduct();
+        recipeProduct.setProduct(product);
+        recipeProduct.setRecipe(recipeWithProducts.getRecipes());
+        recipeProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
+        recipeProduct.setAdded(false);
 
-        shoppingList.getProducts().add(shoppingListProduct);
-        Intent intent = new Intent(getApplicationContext(), DetailShoppingListActivity.class);
+        recipeWithProducts.getProducts().add(recipeProduct);
+        Intent intent = new Intent(getApplicationContext(), DetailRecipeListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("editMode", true);
-        intent.putExtra("shoppingList", shoppingList);
+        intent.putExtra("recipeList", recipeWithProducts);
         startActivity(intent);
         finish();
     }

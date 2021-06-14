@@ -18,6 +18,7 @@ import java.util.List;
 public class DetailRecipeListActivity extends Activity {
 
     private DetailRecipeListAdapter detailRecipeListAdapter;
+    private RecyclerView recyclerView;
     private RecipeWithProducts recipe;
     private List<RecipeProduct> products;
 
@@ -47,7 +48,7 @@ public class DetailRecipeListActivity extends Activity {
         cancelButton.setVisibility(View.INVISIBLE);
         addNewImage.setVisibility(View.INVISIBLE);
 
-        final RecyclerView recyclerView  = findViewById(R.id.recycler_view);
+        recyclerView  = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
@@ -74,12 +75,36 @@ public class DetailRecipeListActivity extends Activity {
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchMode(false);
+
+                AppDatabase.getDbInstance(v.getContext()).recipeProductDao().insertRecipeProduct(products.stream().toArray(RecipeProduct[]::new));
+            }
+        });
+
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchMode(false);
+                recipe = AppDatabase.getDbInstance(v.getContext()).recipeWithProductsDao().findRecipeWithProductsByRecipeId(recipe.getRecipes().getRecipeId());
+                products = recipe.getProducts();
+                detailRecipeListAdapter = new DetailRecipeListAdapter(getApplicationContext(), products);
+                recyclerView.setAdapter(detailRecipeListAdapter);
             }
         });
+
+        addNewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(
+                        new Intent(v.getContext(), AddProductToRecipeActivity.class)
+                                .putExtra("recipeList", recipe));
+            }
+        });
+
+        switchMode(getIntent().getBooleanExtra("editMode", false));
     }
 
     public void switchMode(boolean editMode) {
@@ -96,5 +121,9 @@ public class DetailRecipeListActivity extends Activity {
             cancelButton.setVisibility(View.INVISIBLE);
             addNewImage.setVisibility(View.INVISIBLE);
         }
+
+        detailRecipeListAdapter = new DetailRecipeListAdapter(getApplicationContext(), products);
+        detailRecipeListAdapter.switchMode(editMode);
+        recyclerView.setAdapter(detailRecipeListAdapter);
     }
 }

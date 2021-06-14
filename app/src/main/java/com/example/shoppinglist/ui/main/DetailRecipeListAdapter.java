@@ -18,6 +18,7 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
 
     private Context context;
     private List<RecipeProduct> recipeProducts;
+    private boolean editMode = false;
 
     public DetailRecipeListAdapter(Context context, List<RecipeProduct> recipeProducts) {
         this.context = context;
@@ -40,17 +41,7 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
     @Override
     public void onBindViewHolder(@NonNull DetailRecipeListAdapter.MyViewHolder holder, int position) {
         final RecipeProduct recipeProduct = recipeProducts.get(position);
-        //holder.textViewName.setText(recipeProduct.toString());
         holder.textViewName.setText(recipeProduct.getProduct().getName() + " " + recipeProduct.getQuantity() + " " + recipeProduct.getProduct().getQuantityUnit());
-
-        /*holder.textViewName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recipeProduct.toString();
-
-                AppDatabase.getDbInstance(context).recipeProductDao().insertRecipeProduct(recipeProduct);
-            }
-        });*/
     }
 
 
@@ -64,12 +55,25 @@ public class DetailRecipeListAdapter extends RecyclerView.Adapter<DetailRecipeLi
         ImageView imageEdit;
         ImageView addNew;
         TextView textViewName;
+        ImageView imageDelete;
 
         public MyViewHolder(View view) {
             super(view);
             textViewName = view.findViewById(R.id.text_view_name);
             imageEdit = view.findViewById(R.id.image_delete);
             addNew = view.findViewById(R.id.add_new_image);
+            imageDelete = view.findViewById(R.id.image_delete);
+
+            if (editMode) {
+                imageDelete.setVisibility(View.VISIBLE);
+            } else {
+                imageDelete.setVisibility(View.INVISIBLE);
+            }
         }
+    }
+
+        public void switchMode(boolean editMode) {
+        this.editMode = editMode;
+        notifyDataSetChanged();
     }
 }
