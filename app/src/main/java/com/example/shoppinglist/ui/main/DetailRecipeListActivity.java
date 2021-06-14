@@ -58,7 +58,7 @@ public class DetailRecipeListActivity extends Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
-        recipeTitleTextView.setText(recipe.getRecipes().getName());
+        recipeTitleTextView.setText(recipe.getRecipe().getName());
 
         AppDatabase db = AppDatabase.getDbInstance(getApplicationContext());
 
@@ -69,7 +69,6 @@ public class DetailRecipeListActivity extends Activity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailRecipeListActivity.this, RecipeListAdapter.class);
                 finish();
             }
         });
@@ -94,9 +93,8 @@ public class DetailRecipeListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchMode(false);
-                recipe = AppDatabase.getDbInstance(v.getContext()).recipeWithProductsDao().findRecipeWithProductsByRecipeId(recipe.getRecipes().getRecipeId());
-                products = recipe.getProducts();
-                detailRecipeListAdapter = new DetailRecipeListAdapter(getApplicationContext(), products);
+                products = AppDatabase.getDbInstance(v.getContext()).recipeProductDao().findRecipeProductsByRecipeId(recipe.getRecipe().getRecipeId());
+                detailRecipeListAdapter.setProducts(products);
                 recyclerView.setAdapter(detailRecipeListAdapter);
             }
         });

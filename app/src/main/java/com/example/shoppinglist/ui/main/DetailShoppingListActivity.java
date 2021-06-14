@@ -97,9 +97,7 @@ public class DetailShoppingListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switchMode(false);
-                shoppingList = AppDatabase.getDbInstance(v.getContext()).shoppingListWithProductsDAO().findShoppingListWithProductsByShoppingListId(shoppingList.getShoppingList().getShoppingListId());
-                products = shoppingList.getProducts();
-                //detailShoppingListAdapter = new DetailShoppingListAdapter(getApplicationContext(), products);
+                products = AppDatabase.getDbInstance(v.getContext()).shoppingListProductDao().findShoppingListProductsByShoppingListId(shoppingList.getShoppingList().getShoppingListId());
                 detailShoppingListAdapter.setProducts(products);
                 recyclerView.setAdapter(detailShoppingListAdapter);
             }

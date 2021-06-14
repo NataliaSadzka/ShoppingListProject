@@ -45,13 +45,20 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </androidx.viewpager.widget.ViewPager>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="right|top"
-            app:srcCompat="@android:drawable/ic_menu_help" app:backgroundTint="@color/blekit"
-            android:layout_marginHorizontal="15dp" android:layout_marginVertical="10dp"/>
+            app:srcCompat="@android:drawable/ic_menu_help"
+            app:backgroundTint="@color/blekit"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:scaleType="center"
+            app:fabCustomSize="32dp"
+            app:maxImageSize="24dp"
+    />
 
 
 

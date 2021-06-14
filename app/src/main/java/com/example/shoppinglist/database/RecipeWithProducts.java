@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RecipeWithProducts implements Serializable {
     @Embedded
-    public Recipe recipes;
+    public Recipe recipe;
     @Relation(
             parentColumn = "recipeId",
             entityColumn = "productId",
@@ -17,12 +17,12 @@ public class RecipeWithProducts implements Serializable {
     )
     public List<RecipeProduct> products;
 
-    public Recipe getRecipes() {
-        return recipes;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setRecipes(Recipe recipes) {
-        this.recipes = recipes;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     public List<RecipeProduct> getProducts() {

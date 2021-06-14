@@ -24,7 +24,7 @@
             android:text="Dodaj"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:background="@color/blekit1" android:layout_width="wrap_content"
+            android:background="@color/green1" android:layout_width="wrap_content"
             android:layout_marginHorizontal="160dp" android:layout_marginVertical="580dp"/>
 
     <ImageView

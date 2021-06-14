@@ -85,7 +85,7 @@ public class AddProductToRecipeActivity extends Activity {
     private void addProductToRecipe(Product product) {
         RecipeProduct recipeProduct = new RecipeProduct();
         recipeProduct.setProduct(product);
-        recipeProduct.setRecipe(recipeWithProducts.getRecipes());
+        recipeProduct.setRecipe(recipeWithProducts.getRecipe());
         recipeProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
         recipeProduct.setAdded(false);
 

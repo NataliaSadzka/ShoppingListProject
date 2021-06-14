@@ -1,9 +1,11 @@
 package com.example.shoppinglist.ui.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.example.shoppinglist.MainActivity;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.*;
 
@@ -99,7 +101,10 @@ public class AddRecipeToShoppingListActivity extends Activity {
 
         ShoppingListProduct[] productsToSave = shoppingListProductMap.values().toArray(new ShoppingListProduct[shoppingListProductMap.values().size()]);
         db.shoppingListProductDao().insertShoppingListProduct(productsToSave);
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("selectedTab", "recipes");
+        startActivity(intent);
     }
 }
 

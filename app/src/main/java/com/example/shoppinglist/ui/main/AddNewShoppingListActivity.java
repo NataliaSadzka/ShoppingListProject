@@ -1,18 +1,18 @@
 package com.example.shoppinglist.ui.main;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import androidx.fragment.app.FragmentActivity;
+import com.example.shoppinglist.MainActivity;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.ShoppingList;
 
-public class AddNewShoppingListActivity extends Activity {
-
-    private ShoppingListAdapter shoppingListAdapter;
+public class AddNewShoppingListActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,9 @@ public class AddNewShoppingListActivity extends Activity {
         shoppingList.setName(name);
 
         db.shoppingListDao().insertShoppingList(shoppingList);
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("selectedTab", "shoppingLists");
+        startActivity(intent);
     }
 }

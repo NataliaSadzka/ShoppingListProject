@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton helpButton = findViewById(R.id.about);
 
+        if (getIntent() != null && getIntent().getStringExtra("selectedTab") != null) {
+            String selectedTab = getIntent().getStringExtra("selectedTab");
+            if (selectedTab.equals("shoppingLists")) {
+                viewPager.setCurrentItem(0);
+            } else if (selectedTab.equals("recipes")) {
+                viewPager.setCurrentItem(1);
+            }
+            getIntent().putExtra("selectedTab", "");
+        }
+
         helpButton = findViewById(R.id.about);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override

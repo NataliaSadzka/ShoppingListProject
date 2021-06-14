@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import com.example.shoppinglist.MainActivity;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.AppDatabase;
 import com.example.shoppinglist.database.Recipe;
@@ -23,7 +24,6 @@ public class AddNewRecipe extends Activity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddNewRecipe.this, ShoppingListFragment.class);
                 finish();
             }
         });
@@ -43,6 +43,9 @@ public class AddNewRecipe extends Activity {
         recipe.setName(name);
 
         db.recipeDao().insertRecipe(recipe);
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("selectedTab", "recipes");
+        startActivity(intent);
     }
 }
