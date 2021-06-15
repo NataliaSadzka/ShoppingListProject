@@ -11,8 +11,7 @@ import com.example.shoppinglist.database.Product;
 import com.example.shoppinglist.database.ShoppingListProduct;
 import com.example.shoppinglist.database.ShoppingListWithProducts;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class AddProductToShoppingListActivity extends Activity {
 
@@ -85,13 +84,30 @@ public class AddProductToShoppingListActivity extends Activity {
     }
 
     private void addProductToShoppingList(Product product) {
-        ShoppingListProduct shoppingListProduct = new ShoppingListProduct();
-        shoppingListProduct.setProduct(product);
-        shoppingListProduct.setShoppingList(shoppingList.getShoppingList());
-        shoppingListProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
-        shoppingListProduct.setAdded(false);
+        List<ShoppingListProduct> shoppingListProducts = AppDatabase.getDbInstance(getApplicationContext()).shoppingListProductDao().findShoppingListProductsByShoppingListId(shoppingList.getShoppingList().getShoppingListId());
+        Map<Integer, ShoppingListProduct> shoppingListProductMap = new HashMap<>();
 
-        shoppingList.getProducts().add(shoppingListProduct);
+        for (ShoppingListProduct shoppingListProduct : shoppingListProducts) {
+            shoppingListProductMap.put(shoppingListProduct.getProduct().getProductId(), shoppingListProduct);
+        }
+
+        ShoppingListProduct shoppingListProduct;
+        if (shoppingListProductMap.containsKey(product.getProductId())) {
+            shoppingListProduct = shoppingListProductMap.get(product.getProductId());
+            shoppingListProduct.setQuantity(shoppingListProduct.getQuantity() + Double.parseDouble(quantityEditText.getText().toString()));
+            shoppingListProductMap.put(shoppingListProduct.getProduct().getProductId(), shoppingListProduct);
+        } else {
+            shoppingListProduct = new ShoppingListProduct();
+            shoppingListProduct.setProduct(product);
+            shoppingListProduct.setShoppingList(shoppingList.getShoppingList());
+            shoppingListProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
+            shoppingListProduct.setAdded(false);
+            shoppingListProductMap.put(shoppingListProduct.getProduct().getProductId(), shoppingListProduct);
+        }
+
+        shoppingListProducts = new ArrayList<>(shoppingListProductMap.values());
+        shoppingList.setProducts(shoppingListProducts);
+
         Intent intent = new Intent(getApplicationContext(), DetailShoppingListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("editMode", true);

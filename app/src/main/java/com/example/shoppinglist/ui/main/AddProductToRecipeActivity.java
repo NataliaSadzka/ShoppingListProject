@@ -8,8 +8,7 @@ import android.widget.*;
 import com.example.shoppinglist.R;
 import com.example.shoppinglist.database.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class AddProductToRecipeActivity extends Activity {
 
@@ -83,13 +82,30 @@ public class AddProductToRecipeActivity extends Activity {
     }
 
     private void addProductToRecipe(Product product) {
-        RecipeProduct recipeProduct = new RecipeProduct();
-        recipeProduct.setProduct(product);
-        recipeProduct.setRecipe(recipeWithProducts.getRecipe());
-        recipeProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
-        recipeProduct.setAdded(false);
+        List<RecipeProduct> recipeProducts = AppDatabase.getDbInstance(getApplicationContext()).recipeProductDao().findRecipeProductsByRecipeId(recipeWithProducts.getRecipe().getRecipeId());
+        Map<Integer, RecipeProduct> recipeProductMap = new HashMap<>();
 
-        recipeWithProducts.getProducts().add(recipeProduct);
+        for (RecipeProduct recipeProduct : recipeProducts) {
+            recipeProductMap.put(recipeProduct.getProduct().getProductId(), recipeProduct);
+        }
+
+        RecipeProduct recipeProduct;
+        if (recipeProductMap.containsKey(product.getProductId())) {
+            recipeProduct = recipeProductMap.get(product.getProductId());
+            recipeProduct.setQuantity(recipeProduct.getQuantity() + Double.parseDouble(quantityEditText.getText().toString()));
+            recipeProductMap.put(recipeProduct.getProduct().getProductId(), recipeProduct);
+        } else {
+            recipeProduct = new RecipeProduct();
+            recipeProduct.setProduct(product);
+            recipeProduct.setRecipe(recipeWithProducts.getRecipe());
+            recipeProduct.setQuantity(Double.parseDouble(quantityEditText.getText().toString()));
+            recipeProduct.setAdded(false);
+            recipeProductMap.put(recipeProduct.getProduct().getProductId(), recipeProduct);
+        }
+
+        recipeProducts = new ArrayList<>(recipeProductMap.values());
+        recipeWithProducts.setProducts(recipeProducts);
+
         Intent intent = new Intent(getApplicationContext(), DetailRecipeListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("editMode", true);

@@ -17,7 +17,8 @@
                 android:text="CheckBox"
                 android:layout_width="29dp"
                 android:layout_height="28dp" android:id="@+id/text_view_name" android:layout_weight="1"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+        android:buttonTint="@color/black"/>
 
 
         <ImageView

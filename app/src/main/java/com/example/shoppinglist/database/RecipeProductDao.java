@@ -1,9 +1,6 @@
 package com.example.shoppinglist.database;
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.Query;
+import androidx.room.*;
 
 import java.util.List;
 
@@ -12,7 +9,7 @@ public interface RecipeProductDao {
     @Query("SELECT * FROM RecipeProduct")
     List<RecipeProduct> getAllRecipeProducts();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipeProduct(RecipeProduct... recipeProducts);
 
     @Delete

@@ -98,8 +98,10 @@ public class DetailShoppingListActivity extends Activity {
             public void onClick(View v) {
                 switchMode(false);
                 products = AppDatabase.getDbInstance(v.getContext()).shoppingListProductDao().findShoppingListProductsByShoppingListId(shoppingList.getShoppingList().getShoppingListId());
+                shoppingList.setProducts(products);
                 detailShoppingListAdapter.setProducts(products);
                 recyclerView.setAdapter(detailShoppingListAdapter);
+
             }
         });
 
