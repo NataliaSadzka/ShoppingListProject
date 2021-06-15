@@ -12,7 +12,7 @@
             android:layout_marginHorizontal="20dp" android:layout_marginVertical="380dp" android:textSize="20sp"
             android:textColor="#151515"/>
     <TextView
-            android:text="Wersja aplikacji: 1.0.0"
+            android:text="Wersja aplikacji: 1.0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/version_text_view"
             android:layout_marginVertical="460dp"
